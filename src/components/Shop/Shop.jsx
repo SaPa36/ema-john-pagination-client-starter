@@ -3,11 +3,18 @@ import { addToDb, deleteShoppingCart, getShoppingCart } from '../../utilities/fa
 import Cart from '../Cart/Cart';
 import Product from '../Product/Product';
 import './Shop.css';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([])
+    const {count} = useLoaderData();
+    console.log(count)
+
+    const itemsPerPage = 10;
+    const numberOfPages = Math.ceil(count / itemsPerPage);
+
+    const pages = [...Array(numberOfPages).keys()];
 
     useEffect(() => {
         fetch('http://localhost:5001/products')
@@ -81,6 +88,12 @@ const Shop = () => {
                         <button className='btn-proceed'>Review Order</button>
                     </Link>
                 </Cart>
+            </div>
+
+            <div>
+                {
+                    pages.map(page => <button key={page}>{page}</button>)
+                }
             </div>
         </div>
     );
