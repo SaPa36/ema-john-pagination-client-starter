@@ -4,6 +4,7 @@ import { getShoppingCart } from "../utilities/fakedb";
 const cartProductsLoader = async () => {
 
     // if cart data is in database, you have to use async await
+    //change this for github push
     const storedCart = getShoppingCart();
     const storedCartIds = Object.keys(storedCart)
 
